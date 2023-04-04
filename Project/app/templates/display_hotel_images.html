@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hotel Images</title>
+
+	<style>
+
+		
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+		
+table{
+	
+	width: 63%;
+    justify-content: center;
+    position: relative;
+    left: 18%;
+}
+
+img{height: 12rem;
+    width: 12rem;}
+
+	body{
+		text-align: center;
+	}
+	</style>
+
+</head>
+<body>
+
+
+	<table >
+		<tr>
+		  <th>Name </th>
+		  <th>Image</th> 
+		  <th>Detail</th>
+		  <th>Action</th>
+		  <th>Action</th>
+
+		</tr>
+		{% for hotel in hotel_images %}
+		<tr>
+		  <td>{{ hotel.name }}</td>
+		  <td><img src="{{ hotel.hotel_Main_Img.url }}"   /></td>
+		  <td>Coming It is a very good image</td>
+		  <td><a href="delete/{{ hotel.id }}"> Delete</a></td>
+		  <td><a href="">Edit</a> </td>
+		</tr>
+		{% endfor %}
+		
+	  </table>
+
+	  <a href="add">Add Image</a>
+	  
+
+
+
+	
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+
+We will use the Python interpreter
+To open a Python shell, type this command:
+
+                           py manage.py shell
+
+
+At the bottom, after the three >>> write the following:
+
+                        from Crud_App.models import Crud
+
+1. To see all the records:
+
+                   Crud.objects.all()
+
+   you will see a QuerySet             
+
+2.  Add a record to the table, by executing these two lines:
+
+            record = Crud(Name='Emil', University='Refsnes')
+            record.save()
+
+3.  Now see the table:
+
+                 Crud.objects.all().values()
+
+4. Add Multiple Records by: 
+
+          record1 = Crud(Name='Nadeem', University='CUET')
+          record2 = Crud(Name='Kazim', University='KUET')
+          record3 = Crud(Name='Anik', University='DU')
+          record4 = Crud(Name='Akib', University='BUET')
+          record_list=[record1,record2,record3,record4]
+          for x in record_list:
+               x.save()
+
+                

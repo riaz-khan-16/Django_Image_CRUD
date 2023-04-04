@@ -1,0 +1,13 @@
+When you have installed Django and created your first Django web application,
+and the browser requests the URL, this is basically what happens:
+
+1.Django receives the URL, checks the urls.py file, and calls the view that matches the URL.
+
+2.The view, located in views.py, checks for relevant models.
+
+3.The models are imported from the models.py file.
+
+4.The view then sends the data to a specified template in the template folder.
+
+5.The template contains HTML and Django tags, and with the data it returns finished HTML content back to the browser.
+Django can do a lot more than this, but this is basically what you will learn in this tutorial, and are the basic steps in a simple web application made with Django.

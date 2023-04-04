@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload</title>
+
+    <style>
+
+		.form1{
+            width: 400px;
+			height: 300px;
+			
+			
+			position: relative;
+    left: 30%;
+    background: #FFA;
+    border-color: black;
+    padding: 5rem
+    
+}
+
+body{
+  
+}
+		
+	</style>
+</head>
+<body>
+
+    <div class="form1">
+
+
+   
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    <br>
+    <br>
+
+    <a href="d">See All</a>
+
+</div>
+</body>
+</html>

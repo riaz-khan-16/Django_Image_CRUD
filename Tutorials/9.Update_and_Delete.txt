@@ -1,0 +1,30 @@
+1.To update records that are already in the database,
+ we first have to get the record by id we want to update:
+
+
+        from Crud_App.models import Crud
+        x = Crud.objects.all()[4]
+
+        x.Name = "Anika"
+        x.University = "RUET"
+
+        x.save()
+
+Check:
+
+        Crud.objects.all().values()
+
+
+2.Delete Records
+
+        from Crud_App.models import Crud
+        x = Crud.objects.all()[4]
+        x.delete()
+
+    Check:
+
+        Crud.objects.all().values()
+
+
+
+

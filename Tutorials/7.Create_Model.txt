@@ -1,0 +1,33 @@
+A Django model is a table in your database.
+
+
+Create Table (Model):
+1. go to 'models.py' file in the app folder.
+Add a 'CRUD' table by creating a 'Crud' class, and describe the table fields in it:
+
+                class Crud(models.Model):
+                        field1 = models.CharField(max_length=255)
+                        field2 = models.CharField(max_length=255)
+
+SQLite Database
+When we created the Django project, we got an empty SQLite database.
+It was created in the project root folder, and has the filename db.sqlite3.   
+
+
+2. Migrate
+we must run a command to actually create the table in the database.
+Run this command:
+
+           py manage.py makemigrations app
+
+
+3. The table is not created yet, you will have to run one more command, 
+then Django will create and execute an SQL statement, based on the content of the new file in the /migrations/ folder.
+Run the migrate command:      
+
+                   py manage.py migrate
+
+4.you can view the SQL statement that were executed from the migration above.
+ All you have to do is to run this command, with the migration number:
+
+                    py manage.py sqlmigrate Crud_App 0001

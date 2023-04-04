@@ -1,0 +1,64 @@
+To update a record, we need:
+1. the ID of the record,
+2. a template with an interface that let us change the values.
+
+
+
+1. Change in the table of the template:
+
+                <td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+
+
+2.Add a View:
+                   
+
+                   def update(request, id):
+                            mymember = Crud.objects.get(id=id)
+                            template = loader.get_template('update.html')
+                            context = {
+                                'mymember': mymember,
+                            }
+                            return HttpResponse(template.render(context, request))
+
+                    The update view does the following:
+
+                    Gets the id as an argument.
+                    Uses the id to locate the correct record in the Members table.
+                    loads a template called update.html.
+                    Creates an object containing the member.
+                    Sends the object to the template.
+                    Outputs the HTML that is rendered by the template.
+
+3.URL:
+
+
+urlpatterns = [
+    path('all/update/<int:id>', views.update, name='update'),
+]
+
+
+4.What Happens on Submit?:
+
+URL:
+
+
+            urlpatterns = [
+            path('update/updaterecord/<int:id>', views.updaterecord, name='updaterecord'),
+            ]
+
+
+View:
+            def updaterecord(request, id):
+                    Name = request.POST['name']
+                    University = request.POST['uni']
+                    Age=request.POST['age']
+                    member = Crud.objects.get(id=id)
+                    member.Name = Name
+                    member.University = University
+                    member.save()
+                    return HttpResponseRedirect(reverse('index'))
+
+
+
+
+

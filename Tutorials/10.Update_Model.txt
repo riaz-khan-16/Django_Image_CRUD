@@ -1,0 +1,44 @@
+1.Add Fields in the Model:
+
+        i. Go to models.py of the app make your changes:
+
+                    class Crud(models.Model):
+                            Name = models.CharField(max_length=255)
+                            University = models.CharField(max_length=255)
+                            Dept=models.CharField(max_length=255)
+
+        ii.This is a change in the Model's structure, and therefor we have to make a migration 
+        to tell Django that it has to update the database:   
+
+
+                    py manage.py makemigrations Crud_App
+
+        iii. select option 2 
+        open the models.py file again and allow NULL values for the the new fields:
+                     Dept=models.CharField(max_length=255,null=True)
+
+        iv. And make the migration once again:
+
+                   py manage.py makemigrations Crud_App
+
+         v. Run the migrate command:
+
+                       py manage.py migrate      
+
+2. Insert data to the new field
+
+
+       from Crud_App.models import Crud
+       x = Crud.objects.all()[1]
+       x.Dept='MTE'
+       x.save()
+
+   Check:    
+
+       Crud.objects.all().values()
+         
+
+
+
+
+

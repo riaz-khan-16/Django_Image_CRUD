@@ -1,0 +1,17 @@
+1.Create Template:
+            Start by creating an HTML file in /templates/ folder:
+
+2. Modify View:
+           we need to make the model data available in the template. This is done in the view.
+           In the view we have to import the Crud model, and send it to the template like this:
+
+
+           from .models import Crud
+           def members(request):
+                mymembers = Crud.objects.all().values()
+                template = loader.get_template('All_members.html')
+                context = {
+                    'mymembers': mymembers,
+                }
+                return HttpResponse(template.render(context, request))
+          

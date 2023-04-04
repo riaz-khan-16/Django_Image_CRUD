@@ -1,0 +1,123 @@
+                    https://www.javatpoint.com/django-image-upload
+                    
+                    
+                    
+                           ADD in  settings.py  of project folder
+                        -------------------------------------------
+
+
+                MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+                MEDIA_URL = '/media/'
+
+
+
+
+                             Add in urls.py 
+                     -----------------------------------        
+
+                from django.conf import settings
+                from django.conf.urls.static import static
+                if settings.DEBUG:
+                        urlpatterns += static(settings.MEDIA_URL,
+                                            document_root=settings.MEDIA_ROOT)
+
+
+
+
+                          Add in models.py
+                ---------------------------------------          
+
+            class Hotel(models.Model):
+                name = models.CharField(max_length=50)
+                hotel_Main_Img = models.ImageField(upload_to='images/')
+
+
+
+                    create a forms.py file in  app folder
+            --------------------------------------------------
+
+                        
+                            from django import forms
+                            from .models import *
+                            
+                            
+                            class HotelForm(forms.ModelForm):
+                            
+                                class Meta:
+                                    model = Hotel
+                                    fields = ['name', 'hotel_Main_Img']
+
+
+        
+                                Template
+                  -----------------------------------------
+
+
+
+                                    <!DOCTYPE html>
+                                    <html lang="en">
+                                    <head>
+                                        <meta charset="UTF-8">
+                                        <title>Hotel_image</title>
+                                    </head>
+                                    <body>
+                                        <form method = "post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <button type="submit">Upload</button>
+                                        </form>
+                                    </body>
+                                    </html>
+
+
+
+
+
+                                             write a view
+                                  -------------------------------------           
+
+
+                            from django.http import HttpResponse
+                            from django.shortcuts import render, redirect
+                            from .forms import *
+
+                            # Create your views here.
+
+
+                            def hotel_image_view(request):
+
+                                if request.method == 'POST':
+                                    form = HotelForm(request.POST, request.FILES)
+
+                                    if form.is_valid():
+                                        form.save()
+                                        return redirect('success')
+                                else:
+                                    form = HotelForm()
+                                return render(request, 'hotel_image_form.html', {'form': form})
+
+
+                            def success(request):
+                                return HttpResponse('successfully uploaded')
+
+
+
+                                        urls.py
+                          -----------------------------------              
+
+
+
+                                from django.contrib import admin
+                                from django.urls import path
+                                from django.conf import settings
+                                from django.conf.urls.static import static
+                                from .views import *
+                                
+                                urlpatterns = [
+                                    path('image_upload', hotel_image_view, name='image_upload'),
+                                    path('success', success, name='success'),
+                                ]
+                                
+                                if settings.DEBUG:
+                                    urlpatterns += static(settings.MEDIA_URL,
+                                                        document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,19 @@
+1.Modify Template
+Add a "delete" column in the members template:
+
+
+            <td><a href="delete/{{ x.id }}">delete</a></td>
+
+2.URLs:
+we will add a path() function in the urls.py file
+
+            urlpatterns = [
+                path('delete/<int:id>', views.delete, name='delete'),
+                ]
+3.View:
+
+
+        def delete(request, id):
+            member = Crud.objects.get(id=id)
+            member.delete()
+            return HttpResponseRedirect(reverse(''))

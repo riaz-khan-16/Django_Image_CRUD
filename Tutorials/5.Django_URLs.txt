@@ -1,0 +1,21 @@
+URLs
+Create a file named urls.py in the same folder as the views.py file, and type this code in it:
+
+                    from django.urls import path
+                    from . import views
+
+                    urlpatterns = [
+                        path('crud/', views.members, name='Hello'),
+                    ]
+
+
+There is a file called urls.py on the FirstProject folder, open that file and add
+
+
+                        from django.contrib import admin
+                        from django.urls import include, path
+
+                        urlpatterns = [
+                            path('', include('Crud_App.urls')),
+                            path('admin/', admin.site.urls),
+                        ]

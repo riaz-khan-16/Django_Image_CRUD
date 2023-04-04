@@ -1,0 +1,38 @@
+Django Templates
+Create a templates folder inside the APP folder, and create a HTML file
+
+Like: Hello.html
+
+                    <!DOCTYPE html>
+                    <html>
+                    <body>
+
+                    <h1>Hello World!</h1>
+                    <p>Welcome to my first Django project!</p>
+
+                    </body>
+                    </html>
+
+Include it into view
+
+                 def hello(request):
+                        template = loader.get_template('Hello.html')
+                        return HttpResponse(template.render())
+
+The go to the setting: go settings.py of the project folder
+      
+      add our app name below
+                        
+                     INSTALLED_APPS = [
+                     'django.contrib.admin',
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'django.contrib.sessions',
+                     'django.contrib.messages',
+                     'django.contrib.staticfiles',
+                     'CRUD_APP'
+                     ]
+    
+Then run this command:
+
+                           py manage.py migrate    

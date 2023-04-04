@@ -1,0 +1,53 @@
+
+
+
+
+To install Django, you must have Python installed, and a package manager like PIP.
+PIP is included in Python from version 3.4.
+
+
+
+To check if your system has Python installed, run this command in the command prompt:
+                            
+                            python --version
+
+
+To check if your system has PIP installed, run this command in the command prompt:                             
+                            
+                             pip --version
+
+                             
+
+Virtual Environment:
+It is suggested to have a dedicated virtual environment for each Django project
+
+                            py -m venv virtual_environment
+
+This will set up a virtual environment, and create a folder named "virtual_environment" with subfolders and files       
+
+Activate the environment:
+Then you have to activate the environment, by typing this command:
+                             
+                             virtual_environment\Scripts\activate.bat
+
+
+Install Django
+Now, that we have created a virtual environment, we are ready to install Django.
+
+                                 py -m pip install Django
+
+
+You can check if Django is installed by asking for its version number like this:
+
+                                   django-admin --version
+
+
+My First Project: 
+
+
+                        django-admin startproject Project
+
+
+Run the Django Project: enter the project folder 'FirstProject' and run the command:
+
+                        py manage.py runserver                        

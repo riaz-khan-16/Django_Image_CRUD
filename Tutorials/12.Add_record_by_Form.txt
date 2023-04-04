@@ -1,0 +1,74 @@
+1. Create Template:
+                  
+                    <h1>Add member</h1>
+                    <form action="addrecord/" method="post">
+                    {% csrf_token %}
+                    Name:<br>
+                    <input name="name">
+                    <br><br>
+                    University:<br>
+                    <input name="uni">
+                    <br><br>
+                    <input type="submit" value="Submit">
+                    </form>
+
+Django requires this line in the form:
+{% csrf_token %}
+to handle Cross Site Request Forgeries in forms where the method is POST.
+
+
+2. Chane in View
+Next, add a view in the views.py file, name the new view add:
+
+
+               def add(request):
+                    template = loader.get_template('add.html')
+                    return HttpResponse(template.render({}, request))
+
+
+3.Change in URL:
+            Add a path() function in the /urls.py file
+
+
+            urlpatterns = [
+                path('add/', views.add, name='add'),
+                ]
+
+
+4.URL for action:
+            The action attribute specifies where to send the form data,
+in this case the form data will be sent to addrecord/, so we must add a path() function in 
+the urls.py file that points to the right view:
+
+
+              urlpatterns = [
+                        path('add/addrecord/', views.addrecord, name='addrecord'),
+                        ]
+
+
+
+5.Code for Adding Records:
+           we have made the user interface, and we point the URL to the view called addrecord,
+but we have not made the view yet
+Make sure you add the addrecord view in the in the views.py file
+
+
+
+            from django.http import HttpResponse, HttpResponseRedirect
+            from django.template import loader
+            from django.urls import reverse
+            from .models import Member
+            def addrecord(request):
+                    x = request.POST['name']
+                    y = request.POST['uni']
+                    z=request.POST['age']
+                    member = Crud(Name=x, University=y, Age=z)
+                    member.save()
+                    return HttpResponseRedirect(reverse('members'))
+
+
+
+
+
+
+

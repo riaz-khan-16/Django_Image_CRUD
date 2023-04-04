@@ -1,0 +1,12 @@
+1. Activate the virtual Environment
+
+               virtual_environment\Scripts\activate.bat
+
+2. Go to the project folder
+
+           cd Project
+
+3. Run the project:
+
+             py manage.py runserver
+

@@ -1,0 +1,14 @@
+What is an App?
+An app is a web application that has a specific meaning in your project, 
+like a home page, a contact form, or a members database.
+we will create an app that allows us to list and register members in a database.
+
+
+
+Create App:
+I will name my app CRUD_APP. Open another command prompt.
+Go to the 'FirstProject' Folder and run this command:
+
+               py manage.py startapp Name
+
+
