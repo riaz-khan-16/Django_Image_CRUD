@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "rest-api-crud"
+version = "0.1.0"
+description = ""
+authors = ["riaz-khan-16 <goriazmte@gmail.com>"]
+readme = "README.md"
+packages = [{include = "rest_api_crud"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.3"
+djangorestframework = "^3.14.0"
+django-cors-headers = "^4.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

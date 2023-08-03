@@ -1,0 +1,18 @@
+echo "# Django_Image_CRUD" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/riaz-khan-16/REST_API_Django_CRUD.git
+git push -u origin main
+
+
+
+
+git add .
+git status
+git commit -m "commit no "
+git remote -v
+git pull origin main --rebase
+git push origin main
+

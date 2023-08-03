@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        </style>
+</head>
+<body onload="getData()">
+
+
+  
+    <button onclick="addData()">Add Data</button>
+
+    <div id="data-container"></div>
+
+    <ul>
+
+
+    </ul>
+
+
+    <h2>A basic HTML table</h2>
+
+    <table style="width:100%">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Hometown</th>
+        <th>Present Address</th>
+        <th>Occupation</th>
+        <th>Height</th>
+        <th>Action</th>
+      </tr>
+     
+      
+    </table>
+    
+
+   
+    <form action="" id="introForm">
+
+        <h1>Add new Data</h1>
+        <input type="text" id="name" class="form-control" placeholder="Enter your Name..."><br>
+        <input type="text" id="color" class="form-control" placeholder="Enter your Color..."><br>
+        <input type="text" id="hometown" class="form-control" placeholder="Enter your Hometown..."><br>
+        <input type="text" id="present_address" class="form-control" placeholder="Enter your present address..."><br>
+        <input type="text" id="occupation" class="form-control" placeholder="Enter your Occupation..."><br>
+        <input type="text" id="height" class="form-control" placeholder="Enter your Height..."><br>
+        <button type="submit">Submit</button>
+
+      </form>
+
+
+    <script>
+
+
+    //   document.querySelector("body").addEventListener("onLoad","getData()")    
+      function getData(){
+
+
+
+        fetch('http://127.0.0.1:8000/persons')
+        .then(res =>{return  res.json()})
+        .then(data=>{
+
+
+            data.forEach(element=> {
+
+                // console.log(element.name)
+                // console.log(element.color)
+                
+                const markup=`<tr>
+                 
+                    
+        <td>${element.id}</td>   
+        <td>${element.name}</td>
+        <td>${element.color}</td>
+        <td>${element.hometown}</td>
+        <td>${element.present_address}</td>
+        <td>${element.occupation}</td>
+        <td>${element.height}</td>
+        <td><button onclick="deleteData(${element.id})">Delete</button></td>
+        
+        <td><button onclick="updateData(${element.id})">Default Update</button></td>
+
+        <td> <a href="update.html">  <button >Update Data</button> </a></td>
+
+      </tr>`;
+                document.querySelector('table').insertAdjacentHTML('beforeend',markup)
+
+            });
+        })
+                    
+                       
+                       
+                    
+      }
+           
+
+
+
+
+    //   adding New Data
+
+      let introForm = document.getElementById("introForm");
+      introForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            var name = document.getElementById("name");
+            var color = document.getElementById("color");
+            var hometown = document.getElementById("hometown");
+            var present_address = document.getElementById("present_address");
+            var occupation = document.getElementById("occupation");
+            var height = document.getElementById("height");
+
+            const data = {
+            "name": name.value,
+            "hometown": hometown.value,
+            "present_address": present_address.value,
+            "occupation": occupation.value,
+            "height": height.value,
+            "color": color.value
+                   };
+
+
+            const apiUrl = 'http://127.0.0.1:8000/persons'; // Replace this with your actual API endpoint
+
+            // POST request using fetch()
+            fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify the content type for the request body
+            },
+            body: JSON.stringify(data), // Convert the data object to a JSON string
+            })
+            .then((response) => {
+                // Check if the response has a successful status code (e.g., 200, 201)
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the response body as JSON
+            })
+            .then((responseData) => {
+                // Handle the response data returned by the server
+                console.log('POST request successful:', responseData);
+            })
+            .catch((error) => {
+                // Handle any errors that occurred during the fetch process
+                console.error('Error during POST request:', error);
+            });      
+
+
+           
+
+            console.log(
+      `This form has a username of ${name.value} and Color of ${color.value}`
+              );
+           
+            });
+
+
+
+
+
+            // Delete Id 
+
+
+
+            function deleteData(x){
+
+                        var id=x
+                        console.log(id)
+
+                        const apiUrl = `http://127.0.0.1:8000/persons/${id}`; 
+                       
+
+            
+                        fetch(apiUrl, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                             
+                        },
+                        
+                        })
+                        .then((response) => {
+                            if (!response.ok) {
+
+
+
+                                throw new Error("Network response was not ok");
+                            }
+                            alert("Person deleted successfully!");
+                        })
+                        
+            }
+
+
+
+
+            // Update data
+
+
+                    function updateData(x){
+
+                        var id=x
+                        console.log(id)
+
+                        const updateddata = {
+                            "id":id,
+                        "name": "Riaz",
+                        "hometown": "Riaz",
+                        "present_address": "Riaz",
+                        "occupation":"Riaz",
+                        "height": "Riaz",
+                        "color": "Riaz"
+                            };
+
+
+
+                        const apiUrl = `http://127.0.0.1:8000/persons/${id}`; 
+                       
+
+            
+                        fetch(apiUrl, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                             
+                        },
+                        body: JSON.stringify(updateddata), 
+                        })
+                        .then((response) => {
+                        if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        // Handle the successful response from the server
+                        alert("Person updated successfully!");
+                        // You can perform additional actions i
+
+                    })
+                    .catch((error) => {
+                        // Handle errors that occurred during the PUT or PATCH request
+                        alert("Error updating the person. Please try again.");
+                        console.error("Error:", error);
+                    });
+
+
+
+
+                        
+                    }        
+                    
+
+     
+    </script>
+    
+</body>
+</html>

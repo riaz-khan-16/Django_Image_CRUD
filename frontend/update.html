@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update  Data</title>
+</head>
+<body >
+ 
+
+
+    
+       
+  
+    <form action="" id="introForm">
+
+        <h1>Update your Data</h1>
+        <input type="text" id="id" class="form-control" placeholder="Enter your ID..."><br>
+        <input type="text" id="name" class="form-control" placeholder="Enter your Name..."><br>
+        <input type="text" id="color" class="form-control" placeholder="Enter your Color..."><br>
+        <input type="text" id="hometown" class="form-control" placeholder="Enter your Hometown..."><br>
+        <input type="text" id="present_address" class="form-control" placeholder="Enter your present address..."><br>
+        <input type="text" id="occupation" class="form-control" placeholder="Enter your Occupation..."><br>
+        <input type="text" id="height" class="form-control" placeholder="Enter your Height..."><br>
+        <button type="submit">Submit</button>
+
+      </form>
+
+    
+
+
+      <script>
+
+                
+
+               
+            
+
+
+
+
+    let introForm = document.getElementById("introForm");
+      introForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            var id = document.getElementById("id");
+            var name = document.getElementById("name");
+            var color = document.getElementById("color");
+            var hometown = document.getElementById("hometown");
+            var present_address = document.getElementById("present_address");
+            var occupation = document.getElementById("occupation");
+            var height = document.getElementById("height");
+
+            const updateddata = {
+            "id": id.value,
+            "name": name.value,
+            "hometown": hometown.value,
+            "present_address": present_address.value,
+            "occupation": occupation.value,
+            "height": height.value,
+            "color": color.value
+                   };
+
+                // var id=x
+                // console.log(id)
+
+                // const updateddata = {
+                //     "id":id,
+                // "name": "Riaz",
+                // "hometown": "Riaz",
+                // "present_address": "Riaz",
+                // "occupation":"Riaz",
+                // "height": "Riaz",
+                // "color": "Riaz"
+                //     };
+
+
+
+                const apiUrl = `http://127.0.0.1:8000/persons/${id.value}`; 
+
+
+
+                    fetch(apiUrl, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        
+                    },
+                    body: JSON.stringify(updateddata), 
+                    })
+                    .then((response) => {
+                    if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                    })
+                    .then((data) => {
+                    // Handle the successful response from the server
+                    alert("Person updated successfully!");
+                    // You can perform additional actions i
+
+                    })
+                    .catch((error) => {
+                    // Handle errors that occurred during the PUT or PATCH request
+                    alert("Error updating the person. Please try again.");
+                    console.error("Error:", error);
+                    });
+
+
+
+
+                }
+
+      )
+
+      </script>
+    
+</body>
+
+
+
+
+</html>
